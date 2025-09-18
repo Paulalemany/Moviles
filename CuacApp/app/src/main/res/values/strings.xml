@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Cuac App</string>
+    <string name="edit_message">¿Cuac?</string>
+    <string name="button_send">¡Cuac!</string>
 </resources>
