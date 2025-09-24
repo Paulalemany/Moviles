@@ -1,12 +1,16 @@
 package com.example.desktop;
 
 import java.awt.Button;                 //Representa el boton
+import java.awt.Canvas;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.TextField;              //Representa el texto
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;    //Permite escuchar los eventos de raton
-import java.io.File;
+
 import java.io.IOException;
 
 import javax.sound.sampled.AudioInputStream;
@@ -14,10 +18,13 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
 import javax.swing.JFrame;              //Crea la ventana
 import javax.swing.JOptionPane;
 
 public class Main {
+
+    private BufferedImage imagen;
 
     public static void main(String[] args) {
         //Creamos la ventana
@@ -68,6 +75,34 @@ public class Main {
             @Override public void mouseExited(MouseEvent e) {}
         });
 
+        //Anadimos un canvas y sus botones
+        //Lienzo
+        Canvas lienzo = new Canvas();
+        lienzo.setBounds(50 + 95, 50, 300, 250); //Posición y tamaño
+        lienzo.setBackground(Color.WHITE);
+        renderView.add(lienzo);
+
+        Button draw = new Button("Draw");
+        draw.setBounds(50 + 95, 320, 100, 30);
+        renderView.add(draw);
+        draw.addActionListener(e -> {
+            Graphics g = lienzo.getGraphics();
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setColor(Color.ORANGE);
+            g2.fillOval(100, 50, 100, 100);
+            g2.dispose();
+        });
+
+        Button clear = new Button("Clear");
+        clear.setBounds(250 + 95, 320, 100, 30);
+        renderView.add(clear);
+        clear.addActionListener(e ->{
+            Graphics g = lienzo.getGraphics();
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setColor(Color.WHITE);
+            g2.fillRect(0,0, lienzo.getWidth(), lienzo.getHeight());    //Para limpiar pintamos el lienzo entero del color del fondo
+            g2.dispose();
+        });
 
     }
 
