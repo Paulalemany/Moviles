@@ -33,8 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     /** Called when the user taps the ¡Cuac! button */
     public void sendMesagge(View view) {
-        //Suena Cuac cuando pulsas el botón
-        mediaPlayer.start();
+
 
         //Coge el texto del cuadro de dialogo de al lado
         Intent intent = new Intent(this, DisplayMessageActivity.class);
@@ -42,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
+
+        //Suena Cuac cuando pulsas el botón
+        mediaPlayer.start();
 
     }
 
