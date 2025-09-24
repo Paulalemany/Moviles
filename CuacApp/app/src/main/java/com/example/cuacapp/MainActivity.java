@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.cuacapp.MESSAGE";
+    private MiSurfaceView miSurfaceView;
     MediaPlayer mediaPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,21 @@ public class MainActivity extends AppCompatActivity {
 
         //Carga del sonido para cuando clickas el boton
         mediaPlayer = MediaPlayer.create(this, R.raw.duck);
+
+        //para el lienzo
+        miSurfaceView = findViewById(R.id.miSurfaceView);
+        findViewById(R.id.Draw_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                miSurfaceView.dibujarFigura();
+            }
+        });
+        findViewById(R.id.Clear_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                miSurfaceView.limpiar();
+            }
+        });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
